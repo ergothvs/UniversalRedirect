@@ -63,7 +63,7 @@ namespace MapleLib.PacketLib
 		/// </summary>
 		public event ClientDisconnectedHandler OnClientDisconnected;
 
-		public delegate void InitPacketReceived(short version, byte serverIdentifier);
+		public delegate void InitPacketReceived(short version, byte locale);
 		public event InitPacketReceived OnInitPacketReceived;
 
 		/// <summary>
@@ -235,10 +235,10 @@ namespace MapleLib.PacketLib
             string unknown = reader.ReadMapleString();
             _SIV = new MapleCrypto(reader.ReadBytes(4), version);
             _RIV = new MapleCrypto(reader.ReadBytes(4), version);
-            byte serverType = reader.ReadByte();
+            byte locale = reader.ReadByte();
             if (_type == SessionType.CLIENT_TO_SERVER)
             {
-                OnInitPacketReceived(version, serverType);
+                OnInitPacketReceived(version, locale);
             }
             WaitForData();
         }

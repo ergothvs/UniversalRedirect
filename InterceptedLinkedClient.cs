@@ -68,7 +68,6 @@ namespace UniversalRedirect
             }
             Session session = new Session(sock, SessionType.CLIENT_TO_SERVER);
             outSession = session;
-
             outSession.OnInitPacketReceived += new Session.InitPacketReceived(outSession_OnInitPacketReceived);
             outSession.OnPacketReceived += new Session.PacketReceivedHandler(outSession_OnPacketReceived);
             outSession.OnClientDisconnected += new Session.ClientDisconnectedHandler(outSession_OnClientDisconnected);
@@ -149,16 +148,16 @@ namespace UniversalRedirect
             }
         }
 
-        void outSession_OnInitPacketReceived(short version, byte serverIdentifier)
+        void outSession_OnInitPacketReceived(short version, byte locale)
         {
-            Debug.WriteLine("Init packet: v" + version + "ident: " + serverIdentifier);
+            Debug.WriteLine("Init packet: v" + version + "ident: " + locale);
             if (block)
             {
                 connected = true;
                 ChannelCompleteLogin();
                 return;
             }
-            SendHandShake(version, serverIdentifier);
+            SendHandShake(version, locale);
         }
 
         void ChannelCompleteLogin()
@@ -171,7 +170,7 @@ namespace UniversalRedirect
             Debug.WriteLine("change channel complete.");
         }
 
-        private void SendHandShake(short version, byte serverident)
+        private void SendHandShake(short version, byte locale)
         {
             PacketWriter writer = new PacketWriter();
             writer.WriteShort(14);
@@ -186,7 +185,10 @@ namespace UniversalRedirect
             inSession.SIV = new MapleCrypto(siv, version);
             writer.WriteBytes(riv);
             writer.WriteBytes(siv);
-            writer.WriteByte(serverident);
+
+            //session --> byte locale = reader.ReadByte(); should match the locale automatically.
+            writer.WriteByte(locale);//program.locale
+
             gotEnc = true;
             inSession.SendRawPacket(writer.ToArray());
         }
