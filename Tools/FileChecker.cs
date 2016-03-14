@@ -13,15 +13,18 @@ namespace UniversalRedirect.Tools
 
     class FileChecker
     {
-        public static void checkIniFiles()
+        public static void isMaplePresent(string currentDirectory)
         {
-            string currentDirectory = Directory.GetCurrentDirectory();
             if (!File.Exists(currentDirectory + "/Maplestory.exe"))
             {
                 MessageBox.Show("Please place this launcher in your Maplestory folder.");
                 Application.Exit();
             }
-            if (Program.useIniFiles && !File.Exists(currentDirectory + "/RedirectionSettings.ini"))
+        }
+
+        public static void checkIniFiles(string currentDirectory)
+        {
+            if (!File.Exists(currentDirectory + "/RedirectionSettings.ini"))
             {
                 //Init values
                 Program.loginServerIP = "127.0.0.1";//loginServerIP : IP of your loginserver.
@@ -53,6 +56,10 @@ namespace UniversalRedirect.Tools
                 settings.IniWriteValue("Config", "portRangeMin", "8585");
                 settings.IniWriteValue("Config", "portRangeMax", "8605");
             }
+        }
+
+        public static void loadInifiles(string currentDirectory)
+        {
             if (Program.useIniFiles && File.Exists(currentDirectory + "/RedirectionSettings.ini"))
             {
                 //Read from .ini file
@@ -75,7 +82,10 @@ namespace UniversalRedirect.Tools
                 Program.lowPort = (ushort)Int32.Parse(settings.IniReadValue("Config", "portRangeMin"));
                 Program.highPort = (ushort)Int32.Parse(settings.IniReadValue("Config", "portRangeMax"));
             }
+        }
 
+        public static void checkAuthIni(string currentDirectory)
+        {
             if (!File.Exists(currentDirectory + "/nmconew.ini"))
             {
                 //Create new MSAuth Ini file.
@@ -84,5 +94,6 @@ namespace UniversalRedirect.Tools
                 msauth.IniWriteValue("Settings", "ServerPort", Program.authServerPort);
             }
         }
+
     }
 }

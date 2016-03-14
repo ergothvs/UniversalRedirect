@@ -66,11 +66,8 @@ namespace UniversalRedirect
         public static void OnLaunch()
         {
             string currentDirectory = Directory.GetCurrentDirectory();
-            if (!File.Exists(currentDirectory + "/Maplestory.exe"))
-            {
-                MessageBox.Show("Please place this launcher in your Maplestory folder.");
-                Application.Exit();
-            }
+            Tools.FileChecker.isMaplePresent(currentDirectory);
+            Tools.FileChecker.checkAuthIni(currentDirectory);
             Process Maple = new Process();
             Maple.StartInfo.FileName = Path.Combine(currentDirectory, "Maplestory.exe");
             Maple.StartInfo.Arguments = "GameLaunching";

@@ -32,8 +32,14 @@ namespace UniversalRedirect
 
         public frmMain()
         {
+            string currentDirectory = Directory.GetCurrentDirectory();
             //Check if the ini files are present, load their data.
-            Tools.FileChecker.checkIniFiles();
+            if (Program.useIniFiles)
+            {
+                Tools.FileChecker.isMaplePresent(currentDirectory);
+                Tools.FileChecker.checkIniFiles(currentDirectory);
+                Tools.FileChecker.loadInifiles(currentDirectory);
+            }
 
             //Retrieve key's from diamondo's server.
             tools.MapleKeys.Initialize();
@@ -91,8 +97,7 @@ namespace UniversalRedirect
         {
             try
             {
-                if (Maple != null)
-                    Maple.Kill();
+                if (Maple != null) Maple.Kill();
             }
             catch { }
             frmMain_FormClosed(null, null);
@@ -168,16 +173,11 @@ namespace UniversalRedirect
         
         private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
         {
-            FixALL();
-        }
-
-        public void FixALL()
-        {
             trayIcon.Visible = false;
             trayIcon.Dispose();
             derouteIP();
         }
-
+        
         private void routeIP()
         {
             string arguments = "int ip add addr 1 address=" + nexonIp() + "mask=255.255.255.0 st=ac";
