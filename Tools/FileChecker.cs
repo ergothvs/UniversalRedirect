@@ -19,6 +19,7 @@ namespace UniversalRedirect.Tools
             {
                 MessageBox.Show("Please place this launcher in your Maplestory folder.");
                 Application.Exit();
+                Environment.Exit(0);
             }
         }
 

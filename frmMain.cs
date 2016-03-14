@@ -32,11 +32,13 @@ namespace UniversalRedirect
 
         public frmMain()
         {
+            //Check folder first
             string currentDirectory = Directory.GetCurrentDirectory();
+            Tools.FileChecker.isMaplePresent(currentDirectory);
+
             //Check if the ini files are present, load their data.
             if (Program.useIniFiles)
             {
-                Tools.FileChecker.isMaplePresent(currentDirectory);
                 Tools.FileChecker.checkIniFiles(currentDirectory);
                 Tools.FileChecker.loadInifiles(currentDirectory);
             }
@@ -73,6 +75,7 @@ namespace UniversalRedirect
             }
             if (Program.showUI == false)
             {
+                //Launch before opening the UI
                 LaunchMaple();
             }
         }

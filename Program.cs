@@ -66,7 +66,6 @@ namespace UniversalRedirect
         public static void OnLaunch()
         {
             string currentDirectory = Directory.GetCurrentDirectory();
-            Tools.FileChecker.isMaplePresent(currentDirectory);
             Tools.FileChecker.checkAuthIni(currentDirectory);
             Process Maple = new Process();
             Maple.StartInfo.FileName = Path.Combine(currentDirectory, "Maplestory.exe");

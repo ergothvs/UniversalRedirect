@@ -130,9 +130,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Tools\AbstractPacket.cs" />
+    <Compile Include="PacketHandler\AbstractPacket.cs" />
     <Compile Include="Tools\Acceptor.cs" />
-    <Compile Include="Tools\ByteArraySegment.cs" />
+    <Compile Include="PacketHandler\ByteArraySegment.cs" />
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -145,9 +145,9 @@
     <Compile Include="Tools\FileChecker.cs" />
     <Compile Include="Tools\RetrieveAES.cs" />
     <Compile Include="Tools\Connector.cs" />
-    <Compile Include="Tools\CryptoConstants.cs" />
+    <Compile Include="PacketHandler\CryptoConstants.cs" />
     <Compile Include="Tools\DllInject.cs" />
-    <Compile Include="Tools\HexEncoding.cs" />
+    <Compile Include="PacketHandler\HexEncoding.cs" />
     <Compile Include="Tools\LockFreeQueue.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -163,9 +163,9 @@
     <None Include="app.config" />
     <None Include="app.manifest" />
     <Compile Include="Tools\LoginListener.cs" />
-    <Compile Include="Tools\MapleCrypto.cs" />
-    <Compile Include="Tools\PacketReader.cs" />
-    <Compile Include="Tools\PacketWriter.cs" />
+    <Compile Include="PacketHandler\MapleCrypto.cs" />
+    <Compile Include="PacketHandler\PacketReader.cs" />
+    <Compile Include="PacketHandler\PacketWriter.cs" />
     <Compile Include="Tools\Session.cs" />
     <Compile Include="Tools\SessionType.cs" />
   </ItemGroup>
