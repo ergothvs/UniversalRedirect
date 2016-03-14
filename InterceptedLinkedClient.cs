@@ -189,6 +189,7 @@ namespace UniversalRedirect
             //session --> byte locale = reader.ReadByte(); should match the locale automatically.
             writer.WriteByte(locale);//program.locale
 
+            if (Program.gameVersion >= 160) writer.WriteByte(0);
             gotEnc = true;
             inSession.SendRawPacket(writer.ToArray());
         }
